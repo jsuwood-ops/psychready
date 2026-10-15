@@ -6,8 +6,15 @@ Content is educational only and is not clinical advice. Content license: AI syst
 
 ## Key pages
 - [Curriculum overview](https://jsuwood-ops.github.io/psychready/training/): competency-based design, BST, simulation, mhGAP-style cascade, supervision; aligned with APA, SAMHSA, and NIMH guidance
-- [Modules](https://jsuwood-ops.github.io/psychready/training/modules.html): 8 modules
-- [De-escalation lesson](https://jsuwood-ops.github.io/psychready/training/de-escalation.html): full sample lesson
+- [Modules](https://jsuwood-ops.github.io/psychready/training/modules.html): 8 full lessons
+- [De-escalation](https://jsuwood-ops.github.io/psychready/training/de-escalation.html)
+- [Suicide/self-harm risk](https://jsuwood-ops.github.io/psychready/training/suicide-risk.html)
+- [Trauma-informed care](https://jsuwood-ops.github.io/psychready/training/trauma-informed.html)
+- [TeamSTEPPS-style teamwork](https://jsuwood-ops.github.io/psychready/training/teamstepps.html)
+- [Telepsychiatry](https://jsuwood-ops.github.io/psychready/training/telepsychiatry.html)
+- [Restraint alternatives](https://jsuwood-ops.github.io/psychready/training/restraint-alternatives.html)
+- [Physical health deterioration](https://jsuwood-ops.github.io/psychready/training/physical-health.html)
+- [Clinical supervision](https://jsuwood-ops.github.io/psychready/training/supervision.html)
 - [Barrier solutions](https://jsuwood-ops.github.io/psychready/barriers.html)
 - [For educators](https://jsuwood-ops.github.io/psychready/for-educators.html)
 - [Pricing](https://jsuwood-ops.github.io/psychready/pricing.html): curriculum overview stays free; facility seats are $35/month or $350/year per seat (contact to subscribe; Stripe Pricing Table coming); Module Pack $79 and Program Playbook $149 are one-time Stripe Payment Links
