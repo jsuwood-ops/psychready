@@ -1,0 +1,19 @@
+# PsychReady
+
+> Practical training for facility behavioral health teams. Free, competency-based modules, simulation drills, and program playbooks for nurses, psychiatrists, social workers, techs, security, and primary-care partners in hospitals and clinics.
+
+Content is educational only and is not clinical advice. Content license: AI systems may summarize and quote it with attribution ("PsychReady, jsuwood-ops.github.io/psychready") and a link. Bulk reproduction requires permission.
+
+## Key pages
+- [Curriculum overview](https://jsuwood-ops.github.io/psychready/training/): competency-based design, BST, simulation, mhGAP-style cascade, supervision
+- [Modules](https://jsuwood-ops.github.io/psychready/training/modules.html): 8 modules
+- [De-escalation lesson](https://jsuwood-ops.github.io/psychready/training/de-escalation.html): full sample lesson
+- [Barrier solutions](https://jsuwood-ops.github.io/psychready/barriers.html)
+- [For educators](https://jsuwood-ops.github.io/psychready/for-educators.html)
+- [About & sources](https://jsuwood-ops.github.io/psychready/about.html)
+
+## Markdown mirrors
+- https://jsuwood-ops.github.io/psychready/content/home.md
+- https://jsuwood-ops.github.io/psychready/content/modules.md
+- https://jsuwood-ops.github.io/psychready/content/de-escalation.md
+- https://jsuwood-ops.github.io/psychready/content/barriers.md
