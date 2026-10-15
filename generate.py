@@ -1,7 +1,7 @@
 import os, json
 B="https://jsuwood-ops.github.io/psychready"
 DISC='<p class="disclaimer"><strong>Educational use only.</strong> PsychReady content is for staff education and program planning. It is not clinical advice and is not a substitute for accredited training, local policy, or professional judgment.</p>'
-NAV=[("index.html","Home"),("training/index.html","Training"),("training/modules.html","Modules"),("barriers.html","Barriers"),("for-educators.html","For Educators"),("newsletter.html","Newsletter"),("sponsors.html","Sponsors"),("about.html","About")]
+NAV=[("index.html","Home"),("training/index.html","Training"),("training/modules.html","Modules"),("barriers.html","Barriers"),("for-educators.html","For Educators"),("newsletter.html","Newsletter"),("pricing.html","Pricing"),("sponsors.html","Sponsors"),("about.html","About")]
 LOGO='<svg class="logo" viewBox="0 0 40 40" width="36" height="36" aria-hidden="true"><rect width="40" height="40" rx="10" fill="#0f5c5a"/><path d="M8 21h6l3-7 5 14 3-7h7" fill="none" stroke="#f6c453" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 def page(path,title,desc,body,ld=None,training=False):
     d="../"*path.count("/")
@@ -60,7 +60,7 @@ mods_cards="".join(f'<li class="card"><h3><a href="training/modules.html#{a}">{t
 page("index.html","Behavioral Health Staff Training for Facilities","Practical, competency-based training plans, drills, and checklists for hospital and clinic behavioral health and psychiatric teams.",f'''
 <section class="hero"><h1>Practical training for facility behavioral health teams</h1>
 <p class="lead">Competency-based modules, simulation drills, and program playbooks for nurses, psychiatrists, social workers, techs, security, and primary-care partners.</p>
-<p><a class="btn" href="training/index.html">Start training</a> <a class="btn btn-ghost" href="newsletter.html">Get the weekly brief</a></p></section>
+<p><a class="btn" href="training/index.html">Start training</a> <a class="btn btn-ghost" href="pricing.html">See pricing</a> <a class="btn btn-ghost" href="newsletter.html">Get the weekly brief</a></p></section>
 <section><h2>Who PsychReady is for</h2><ul class="grid3">
 <li class="card"><h3>Educators &amp; nurse managers</h3><p>Ready-to-run lesson structures, skills checklists, and refresher calendars.</p></li>
 <li class="card"><h3>ED leads &amp; C-L teams</h3><p>Teamwork drills, telepsychiatry workflows, and consult pathways.</p></li>
@@ -119,6 +119,18 @@ page("for-educators.html","How to Run a Behavioral Health Training Program","A p
 <li><h2>Supervision</h2><p>Use direct observation, documented feedback, and reflective practice, and gatekeep high-risk skills.</p></li>
 <li><h2>Measure outcomes</h2><p>Track confidence and observed competence before training, after it, and at one month. Link results to operational measures such as restraint and seclusion events, staff injuries, time-to-consult, and incident themes. Run booster sessions when metrics slip.</p></li></ol>
 <section><h2>Build local capacity</h2><p>Use mhGAP-style cascade training: develop master trainers who coach unit educators so the program survives turnover.</p></section>{cta()}''')
+
+# PRICING
+page("pricing.html","Pricing","PsychReady pricing. The curriculum overview is free. Facility seats, the Module Pack, and the Program Playbook are paid.",'''
+<h1>Pricing</h1>
+<p class="lead">The curriculum overview remains free. Paid plans unlock facility seats and packs.</p>
+<div class="grid2">
+<section class="card"><h2>Facility Seat Access</h2><p><strong>$35/month per seat</strong></p><p>Customer Portal and Checkout for seats are coming via a Stripe Pricing Table. Seats are sold through Stripe. There is no payment link for seats yet.</p><p><a class="btn" href="contact.html">Contact us to subscribe</a></p></section>
+<section class="card"><h2>Facility Seat Access (Annual)</h2><p><strong>$350/year per seat</strong></p><p>The same seat access, billed once a year. Annual seats will use the same Stripe Pricing Table. There is no payment link for seats yet.</p><p><a class="btn" href="contact.html">Contact us to subscribe</a></p></section>
+<section class="card"><h2>Module Pack</h2><p><strong>$79 one-time</strong></p><p><a class="btn" href="https://buy.stripe.com/aFa7sM1hy7IQ43j6F50Fi00" rel="noopener">Buy Module Pack</a></p></section>
+<section class="card"><h2>Program Playbook</h2><p><strong>$149 one-time</strong></p><p><a class="btn" href="https://buy.stripe.com/4gM3cw2lC7IQeHXd3t0Fi01" rel="noopener">Buy Program Playbook</a></p></section>
+</div>
+''')
 
 # NEWSLETTER
 page("newsletter.html","Weekly Behavioral Health Training Brief","Subscribe to the PsychReady weekly brief: one practical drill, checklist, or training idea for facility behavioral health teams.",'''

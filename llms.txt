@@ -10,6 +10,7 @@ Content is educational only and is not clinical advice. Content license: AI syst
 - [De-escalation lesson](https://jsuwood-ops.github.io/psychready/training/de-escalation.html): full sample lesson
 - [Barrier solutions](https://jsuwood-ops.github.io/psychready/barriers.html)
 - [For educators](https://jsuwood-ops.github.io/psychready/for-educators.html)
+- [Pricing](https://jsuwood-ops.github.io/psychready/pricing.html): curriculum overview stays free; facility seats are $35/month or $350/year per seat (contact to subscribe; Stripe Pricing Table coming); Module Pack $79 and Program Playbook $149 are one-time Stripe Payment Links
 - [About & sources](https://jsuwood-ops.github.io/psychready/about.html)
 
 ## Markdown mirrors
