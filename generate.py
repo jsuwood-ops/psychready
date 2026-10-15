@@ -150,9 +150,19 @@ page("sponsors.html","Sponsor PsychReady","Sponsorship tiers and disclosure poli
 <section><h2>Disclosure</h2><p>Any sponsorship or affiliate relationship will be disclosed on this page and next to the relevant content.</p></section>
 <p><a class="btn" href="contact.html">Enquire about sponsorship</a></p>''')
 
-page("about.html","About PsychReady","PsychReady's mission and evidence sources, including APA, SAMHSA, and NIMH, plus an educational disclaimer.",f'''
+page("about.html","About PsychReady","PsychReady's mission and evidence sources, including APA, SAMHSA, NIMH, WHO mhGAP, and simulation research.",f'''
 <h1>About PsychReady</h1><section><h2>Mission</h2><p>Help facilities build confident, competent, and humane behavioral health teams through practical, evidence-informed training.</p></section>
-<section><h2>What our content is based on</h2><ul><li><strong>American Psychiatric Association (APA)</strong>: {srclinks(["apa","apatele"])}</li><li><strong>Substance Abuse and Mental Health Services Administration (SAMHSA)</strong>: {srclinks(["crisis","tic","988","sud"])}</li><li><strong>National Institute of Mental Health (NIMH)</strong>: {srclinks(["asq","nsp","meds"])}</li><li>WHO mhGAP Intervention Guide and training manuals</li><li>Inpatient mental health quality standards (for example, Royal College of Psychiatrists' quality networks)</li><li>NICE guidance on violence and aggression</li><li>Published research on simulation and Behavioral Skills Training in psychiatric education</li><li>Collaborative care and telepsychiatry literature</li><li>WHO QualityRights human-rights guidance</li></ul><p>We avoid made-up statistics. When we cite results, we name the setting and its limits.</p></section>
+<section><h2>What our content is based on</h2><p>Training modules are aligned first with three U.S. organizations:</p><ul>
+<li><strong>American Psychiatric Association (APA)</strong> &mdash; {srclinks(["apa","apatele"])}</li>
+<li><strong>Substance Abuse and Mental Health Services Administration (SAMHSA)</strong> &mdash; {srclinks(["crisis","tic","988","sud"])}</li>
+<li><strong>National Institute of Mental Health (NIMH)</strong> &mdash; {srclinks(["asq","nsp","meds"])}</li>
+<li>WHO mhGAP Intervention Guide and training manuals</li>
+<li>Inpatient mental health quality standards (for example, Royal College of Psychiatrists' quality networks)</li>
+<li>NICE guidance on violence and aggression</li>
+<li>Published research on simulation and Behavioral Skills Training in psychiatric education</li>
+<li>Collaborative care and telepsychiatry literature</li>
+<li>WHO QualityRights human-rights guidance</li></ul>
+<p>We avoid made-up statistics. When we cite results, we name the setting and its limits. PsychReady is independent and not endorsed by APA, SAMHSA, or NIMH.</p></section>
 {standards()}
 <section><h2>Disclaimer</h2>{DISC}</section>''')
 page("contact.html","Contact PsychReady","Contact PsychReady about training, feedback, corrections, or sponsorship.",'<h1>Contact</h1><p>Email: <a href="mailto:hello@jsuwood-ops.github.io">hello@jsuwood-ops.github.io</a> (placeholder until the domain is live)</p><p>We welcome corrections, feedback, and module requests.</p>')
