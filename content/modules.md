@@ -54,3 +54,11 @@ One practical training idea, drill, or checklist for behavioral health teams eac
 
 ---
 Educational only; not clinical advice. Source: PsychReady
+
+## Standards & sources
+Modules align with public guidance from:
+- American Psychiatric Association (APA): [Clinical Practice Guidelines](https://www.psychiatry.org/psychiatrists/practice/clinical-practice-guidelines), [Telepsychiatry](https://www.psychiatry.org/psychiatrists/practice/telepsychiatry)
+- SAMHSA: [National Behavioral Health Crisis Care Guidance](https://www.samhsa.gov/mental-health/national-behavioral-health-crisis-care), [Trauma-Informed Approaches](https://www.samhsa.gov/mental-health/trauma-violence/trauma-informed-approaches-programs), [988 Lifeline](https://www.samhsa.gov/mental-health/988), [Substance Use Treatment Options](https://www.samhsa.gov/substance-use/treatment/options)
+- NIMH: [ASQ Suicide Screening Toolkit](https://www.nimh.nih.gov/research/research-conducted-at-nimh/asq-toolkit-materials), [Suicide Prevention](https://www.nimh.nih.gov/health/topics/suicide-prevention), [Mental Health Medications](https://www.nimh.nih.gov/health/topics/mental-health-medications)
+
+PsychReady is independent and not endorsed by APA, SAMHSA, or NIMH.

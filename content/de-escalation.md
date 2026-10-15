@@ -62,3 +62,6 @@ Set your own mastery threshold, for example all safety items plus most others. R
 
 ---
 Educational only; not clinical advice. Source: PsychReady
+
+## Standards & sources
+Aligned with APA clinical practice guidelines (psychiatry.org), SAMHSA crisis care and trauma-informed guidance (samhsa.gov), and NIMH suicide prevention/ASQ resources (nimh.nih.gov). Full links: https://jsuwood-ops.github.io/psychready/training/modules.html#standards
