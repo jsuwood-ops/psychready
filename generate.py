@@ -219,7 +219,7 @@ page("pricing.html","Pricing","PsychReady pricing. The curriculum overview is fr
 # NEWSLETTER
 page("newsletter.html","Weekly Behavioral Health Training Brief","Subscribe to the PsychReady weekly brief: one practical drill, checklist, or training idea for facility behavioral health teams.",'''
 <h1>The PsychReady weekly brief</h1><p class="lead">One practical, five-minute read each week: a drill, a checklist, a barrier fix, or a summary of new evidence.</p>
-<form class="form" action="mailto:psychready@mail.grokbot.com?subject=Newsletter%20signup" method="post" enctype="text/plain">
+<form class="form" action="mailto:psychready@mail.grokbot.com?subject=Subscribe%20me%20to%20the%20PsychReady%20newsletter" method="post" enctype="text/plain">
 <label for="n">Name</label><input id="n" name="name" autocomplete="name" required>
 <label for="e">Work email</label><input id="e" name="email" type="email" autocomplete="email" required>
 <label class="check"><input type="checkbox" name="consent" required> I agree to receive the weekly brief and can unsubscribe anytime.</label>
