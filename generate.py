@@ -209,8 +209,8 @@ page("pricing.html","Pricing","PsychReady pricing. The curriculum overview is fr
 <h1>Pricing</h1>
 <p class="lead">The curriculum overview remains free. Paid plans unlock facility seats and packs.</p>
 <div class="grid2">
-<section class="card"><h2>Facility Seat Access</h2><p><strong>$35/month per seat</strong></p><p>Customer Portal and Checkout for seats are coming via a Stripe Pricing Table. Seats are sold through Stripe. There is no payment link for seats yet.</p><p><a class="btn" href="contact.html">Contact us to subscribe</a></p></section>
-<section class="card"><h2>Facility Seat Access (Annual)</h2><p><strong>$350/year per seat</strong></p><p>The same seat access, billed once a year. Annual seats will use the same Stripe Pricing Table. There is no payment link for seats yet.</p><p><a class="btn" href="contact.html">Contact us to subscribe</a></p></section>
+<section class="card"><h2>Facility Seat Access</h2><p><strong>$35/month per seat</strong></p><p>Customer Portal and Checkout for seats are coming via a Stripe Pricing Table. Seats are sold through Stripe. There is no payment link for seats yet.</p><p><a class="btn" href="mailto:psychready@mail.grokbot.com?subject=Facility%20seats%20inquiry">Contact us to subscribe</a></p></section>
+<section class="card"><h2>Facility Seat Access (Annual)</h2><p><strong>$350/year per seat</strong></p><p>The same seat access, billed once a year. Annual seats will use the same Stripe Pricing Table. There is no payment link for seats yet.</p><p><a class="btn" href="mailto:psychready@mail.grokbot.com?subject=Facility%20seats%20inquiry">Contact us to subscribe</a></p></section>
 <section class="card"><h2>Module Pack</h2><p><strong>$79 one-time</strong></p><p><a class="btn" href="https://buy.stripe.com/aFa7sM1hy7IQ43j6F50Fi00" rel="noopener">Buy Module Pack</a></p></section>
 <section class="card"><h2>Program Playbook</h2><p><strong>$149 one-time</strong></p><p><a class="btn" href="https://buy.stripe.com/4gM3cw2lC7IQeHXd3t0Fi01" rel="noopener">Buy Program Playbook</a></p></section>
 </div>
@@ -219,7 +219,7 @@ page("pricing.html","Pricing","PsychReady pricing. The curriculum overview is fr
 # NEWSLETTER
 page("newsletter.html","Weekly Behavioral Health Training Brief","Subscribe to the PsychReady weekly brief: one practical drill, checklist, or training idea for facility behavioral health teams.",'''
 <h1>The PsychReady weekly brief</h1><p class="lead">One practical, five-minute read each week: a drill, a checklist, a barrier fix, or a summary of new evidence.</p>
-<form class="form" action="mailto:hello@jsuwood-ops.github.io?subject=Newsletter%20signup" method="post" enctype="text/plain">
+<form class="form" action="mailto:psychready@mail.grokbot.com?subject=Newsletter%20signup" method="post" enctype="text/plain">
 <label for="n">Name</label><input id="n" name="name" autocomplete="name" required>
 <label for="e">Work email</label><input id="e" name="email" type="email" autocomplete="email" required>
 <label class="check"><input type="checkbox" name="consent" required> I agree to receive the weekly brief and can unsubscribe anytime.</label>
@@ -249,11 +249,11 @@ page("about.html","About PsychReady","PsychReady's mission and evidence sources,
 <p>We avoid made-up statistics. When we cite results, we name the setting and its limits. PsychReady is independent and not endorsed by APA, SAMHSA, or NIMH.</p></section>
 {standards()}
 <section><h2>Disclaimer</h2>{DISC}</section>''')
-page("contact.html","Contact PsychReady","Contact PsychReady about training, feedback, corrections, or sponsorship.",'<h1>Contact</h1><p>Email: <a href="mailto:hello@jsuwood-ops.github.io">hello@jsuwood-ops.github.io</a> (placeholder until the domain is live)</p><p>We welcome corrections, feedback, and module requests.</p>')
+page("contact.html","Contact PsychReady","Contact PsychReady about training, feedback, corrections, or sponsorship.",'<h1>Contact</h1><p>Email: <a href="mailto:psychready@mail.grokbot.com?subject=Facility%20seats%20inquiry">psychready@mail.grokbot.com</a></p><p>We welcome corrections, feedback, and module requests.</p>')
 page("privacy.html","Privacy Policy","PsychReady privacy policy covering newsletter signups and future analytics.",'''
 <h1>Privacy policy</h1><p class="meta">Last updated: October 15, 2026</p>
 <h2>Newsletter</h2><p>If you subscribe, we use your name and email only to send the brief. We'll name our email provider here once we choose one. You can unsubscribe at any time.</p>
 <h2>Analytics</h2><p>We don't currently use analytics or cookies. If we add analytics later, we'll prefer privacy-friendly, cookie-less tools and update this page first.</p>
-<h2>Your rights</h2><p>To access or delete your data, email hello@jsuwood-ops.github.io.</p>
+<h2>Your rights</h2><p>To access or delete your data, email <a href="mailto:psychready@mail.grokbot.com">psychready@mail.grokbot.com</a>.</p>
 <h2>No health data</h2><p>Please don't send patient information to PsychReady.</p>''')
 page("404.html","Page not found","The page you requested could not be found.",'<h1>Page not found</h1><p>Try the <a href="index.html">home page</a> or <a href="training/modules.html">modules</a>.</p>')
