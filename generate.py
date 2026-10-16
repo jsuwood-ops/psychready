@@ -9,13 +9,15 @@ def page(path,title,desc,body,ld=None,training=False):
     lds=[{"@context":"https://schema.org","@type":"Organization","name":"PsychReady","url":B+"/","logo":B+"/logo.svg"},
          {"@context":"https://schema.org","@type":"WebSite","name":"PsychReady","url":B+"/"}]+(ld or [])
     canon=path.replace("index.html","")
+    # Absolute URL shared by canonical, og:url, and the sitemap. `d` only prefixes in-page links.
+    abs_url=f"{B}/{canon}"
     html=f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<!-- BASE_URL = {B} (pending real domain; canonicals are relative until then) -->
+<!-- BASE_URL = {B} -->
 <title>{title} | PsychReady</title><meta name="description" content="{desc}">
-<link rel="canonical" href="{d}{path}">
-<meta property="og:type" content="website"><meta property="og:site_name" content="PsychReady"><meta property="og:title" content="{title} | PsychReady"><meta property="og:description" content="{desc}"><meta property="og:url" content="{B}/{canon}"><meta property="og:image" content="{B}/assets/og.svg">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{title} | PsychReady"><meta name="twitter:description" content="{desc}">
+<link rel="canonical" href="{abs_url}">
+<meta property="og:type" content="website"><meta property="og:site_name" content="PsychReady"><meta property="og:title" content="{title} | PsychReady"><meta property="og:description" content="{desc}"><meta property="og:url" content="{abs_url}"><meta property="og:image" content="{B}/assets/og.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{title} | PsychReady"><meta name="twitter:description" content="{desc}"><meta name="twitter:image" content="{B}/assets/og.png">
 <link rel="icon" href="{d}logo.svg" type="image/svg+xml"><link rel="stylesheet" href="{d}assets/style.css">
 <link rel="alternate" type="text/markdown" href="{d}llms.txt" title="LLM summary">
 <script type="application/ld+json">{json.dumps(lds)}</script></head>
