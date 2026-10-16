@@ -207,13 +207,15 @@ page("for-educators.html","How to Run a Behavioral Health Training Program","A p
 # PRICING
 page("pricing.html","Pricing","PsychReady pricing. The curriculum overview is free. Facility seats, the Module Pack, and the Program Playbook are paid.",'''
 <h1>Pricing</h1>
+<p id="seat-thanks" class="disclaimer" hidden><strong>Thank you.</strong> Check your email for the receipt and onboarding next steps.</p>
 <p class="lead">The curriculum overview remains free. Paid plans unlock facility seats and packs.</p>
 <div class="grid2">
-<section class="card"><h2>Facility Seat Access</h2><p><strong>$35/month per seat</strong></p><p>Customer Portal and Checkout for seats are coming via a Stripe Pricing Table. Seats are sold through Stripe. There is no payment link for seats yet.</p><p><a class="btn" href="mailto:psychready@mail.grokbot.com?subject=Facility%20seats%20inquiry">Contact us to subscribe</a></p></section>
-<section class="card"><h2>Facility Seat Access (Annual)</h2><p><strong>$350/year per seat</strong></p><p>The same seat access, billed once a year. Annual seats will use the same Stripe Pricing Table. There is no payment link for seats yet.</p><p><a class="btn" href="mailto:psychready@mail.grokbot.com?subject=Facility%20seats%20inquiry">Contact us to subscribe</a></p></section>
+<section class="card"><h2>Facility Seat Access</h2><p><strong>$35/month per seat</strong></p><p>The seat count can be chosen at checkout.</p><p><a class="btn" href="https://buy.stripe.com/aFa6oI4tK3sA8jzaVl0Fi02" rel="noopener">Buy seats (monthly)</a></p></section>
+<section class="card"><h2>Facility Seat Access (Annual)</h2><p><strong>$350/year per seat</strong></p><p>The seat count can be chosen at checkout.</p><p><a class="btn" href="https://buy.stripe.com/5kQfZigcsfbi0R7d3t0Fi03" rel="noopener">Buy seats (annual)</a></p></section>
 <section class="card"><h2>Module Pack</h2><p><strong>$79 one-time</strong></p><p><a class="btn" href="https://buy.stripe.com/aFa7sM1hy7IQ43j6F50Fi00" rel="noopener">Buy Module Pack</a></p></section>
 <section class="card"><h2>Program Playbook</h2><p><strong>$149 one-time</strong></p><p><a class="btn" href="https://buy.stripe.com/4gM3cw2lC7IQeHXd3t0Fi01" rel="noopener">Buy Program Playbook</a></p></section>
 </div>
+<p class="small">Questions? <a href="mailto:psychready@mail.grokbot.com?subject=Facility%20seats%20inquiry">psychready@mail.grokbot.com</a></p>
 ''')
 
 # NEWSLETTER
