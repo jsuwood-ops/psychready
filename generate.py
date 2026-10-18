@@ -1,11 +1,16 @@
-import os, json
+import os, json, re, html, datetime
+from pathlib import Path
+from xml.sax.saxutils import escape as xml_escape
 B="https://jsuwood-ops.github.io/psychready"
 DISC='<p class="disclaimer"><strong>Educational use only.</strong> PsychReady content is for staff education and program planning. It is not clinical advice and is not a substitute for accredited training, local policy, or professional judgment.</p>'
-NAV=[("index.html","Home"),("training/index.html","Training"),("training/modules.html","Modules"),("barriers.html","Barriers"),("for-educators.html","For Educators"),("newsletter.html","Newsletter"),("pricing.html","Pricing"),("sponsors.html","Sponsors"),("about.html","About")]
+NAV=[("index.html","Home"),("training/index.html","Training"),("training/modules.html","Modules"),("barriers.html","Barriers"),("for-educators.html","For Educators"),("newsletter.html","Newsletter"),("newsletter/index.html","Archive"),("pricing.html","Pricing"),("sponsors.html","Sponsors"),("about.html","About")]
 LOGO='<svg class="logo" viewBox="0 0 40 40" width="36" height="36" aria-hidden="true"><rect width="40" height="40" rx="10" fill="#0f5c5a"/><path d="M8 21h6l3-7 5 14 3-7h7" fill="none" stroke="#f6c453" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>'
-def page(path,title,desc,body,ld=None,training=False):
+def page(path,title,desc,body,ld=None,training=False,extra_head=""):
     d="../"*path.count("/")
-    nav="".join(f'<li><a href="{d}{h}"{" aria-current=\"page\"" if h==path else ""}>{t}</a></li>' for h,t in NAV)
+    def here(h):
+        if h==path: return True
+        return h=="newsletter/index.html" and path.startswith("newsletter/")
+    nav="".join(f'<li><a href="{d}{h}"{" aria-current=\"page\"" if here(h) else ""}>{t}</a></li>' for h,t in NAV)
     lds=[{"@context":"https://schema.org","@type":"Organization","name":"PsychReady","url":B+"/","logo":B+"/logo.svg"},
          {"@context":"https://schema.org","@type":"WebSite","name":"PsychReady","url":B+"/"}]+(ld or [])
     canon=path.replace("index.html","")
@@ -18,7 +23,7 @@ def page(path,title,desc,body,ld=None,training=False):
 <link rel="canonical" href="{abs_url}">
 <meta property="og:type" content="website"><meta property="og:site_name" content="PsychReady"><meta property="og:title" content="{title} | PsychReady"><meta property="og:description" content="{desc}"><meta property="og:url" content="{abs_url}"><meta property="og:image" content="{B}/assets/og.png">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{title} | PsychReady"><meta name="twitter:description" content="{desc}"><meta name="twitter:image" content="{B}/assets/og.png">
-<link rel="icon" href="{d}logo.svg" type="image/svg+xml"><link rel="stylesheet" href="{d}assets/style.css">
+{extra_head}<link rel="icon" href="{d}logo.svg" type="image/svg+xml"><link rel="stylesheet" href="{d}assets/style.css">
 <link rel="alternate" type="text/markdown" href="{d}llms.txt" title="LLM summary">
 <script type="application/ld+json">{json.dumps(lds)}</script></head>
 <body><a class="skip" href="#main">Skip to content</a>
@@ -29,7 +34,7 @@ def page(path,title,desc,body,ld=None,training=False):
 <footer class="site-footer"><div class="wrap">
 <section class="sponsor-strip" aria-label="Sponsor slots"><h2 class="h6">Founding sponsor slots</h2><div class="slots"><a class="slot" href="{d}sponsors.html">Available</a><a class="slot" href="{d}sponsors.html">Available</a><a class="slot" href="{d}sponsors.html">Available</a></div></section>
 {DISC if training else ""}
-<p><a href="{d}contact.html">Contact</a> · <a href="{d}privacy.html">Privacy</a> · <a href="{d}sponsors.html">Sponsorship &amp; disclosure</a> · <a href="{d}llms.txt">llms.txt</a></p>
+<p><a href="{d}contact.html">Contact</a> · <a href="{d}newsletter/index.html">Past issues</a> · <a href="{d}privacy.html">Privacy</a> · <a href="{d}sponsors.html">Sponsorship &amp; disclosure</a> · <a href="{d}llms.txt">llms.txt</a></p>
 <p class="small">© 2026 PsychReady. Practical training for facility behavioral health teams.</p></div></footer>
 <script src="{d}assets/site.js" defer></script></body></html>'''
     os.makedirs(os.path.dirname(path) or ".",exist_ok=True); open(path,"w").write(html)
@@ -226,7 +231,8 @@ page("newsletter.html","Weekly Behavioral Health Training Brief","Subscribe to t
 <label for="e">Work email</label><input id="e" name="email" type="email" autocomplete="email" required>
 <label class="check"><input type="checkbox" name="consent" required> I agree to receive the weekly brief and can unsubscribe anytime.</label>
 <button class="btn" type="submit">Subscribe</button></form>
-<p class="small">For now, signup opens your email app. We don't store anything on a server yet. See our <a href="privacy.html">privacy policy</a>.</p>''')
+<p class="small">For now, signup opens your email app. We don't store anything on a server yet. See our <a href="privacy.html">privacy policy</a>.</p>
+<p><a href="newsletter/index.html">Read past issues</a></p>''')
 
 # SPONSORS
 page("sponsors.html","Sponsor PsychReady","Sponsorship tiers and disclosure policy for PsychReady. Open for founding sponsors supporting free behavioral health staff training.",'''
@@ -259,3 +265,133 @@ page("privacy.html","Privacy Policy","PsychReady privacy policy covering newslet
 <h2>Your rights</h2><p>To access or delete your data, email <a href="mailto:psychready@mail.grokbot.com">psychready@mail.grokbot.com</a>.</p>
 <h2>No health data</h2><p>Please don't send patient information to PsychReady.</p>''')
 page("404.html","Page not found","The page you requested could not be found.",'<h1>Page not found</h1><p>Try the <a href="index.html">home page</a> or <a href="training/modules.html">modules</a>.</p>')
+
+# NEWSLETTER ARCHIVE
+# Add an issue: create content/newsletter/YYYY-MM-DD-slug.md with title, date, and summary
+# front matter (date must match the filename). Then run: python3 generate.py
+RSS_HEAD='<link rel="alternate" type="application/rss+xml" title="PsychReady weekly brief" href="{href}">'
+def md_inline(s):
+    s=html.escape(s)
+    def link(m):
+        href=m.group(2)
+        if not re.match(r"^(https://|http://|mailto:|\.{0,2}/)", href):
+            return m.group(0)
+        return f'<a href="{href}">{m.group(1)}</a>'
+    s=re.sub(r"\[([^\]]+)\]\(([^)]+)\)", link, s)
+    s=re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", s)
+    s=re.sub(r"(?<!\*)\*([^*]+)\*(?!\*)", r"<em>\1</em>", s)
+    return s
+def md_html(body):
+    out=[]; para=[]; listed=False
+    def flush():
+        nonlocal para
+        if para:
+            out.append("<p>"+md_inline(" ".join(para))+"</p>"); para=[]
+    def close_list():
+        nonlocal listed
+        if listed:
+            out.append("</ul>"); listed=False
+    for line in body.splitlines():
+        if line.startswith("### "):
+            flush(); close_list(); out.append(f"<h3>{md_inline(line[4:])}</h3>")
+        elif line.startswith("## "):
+            flush(); close_list(); out.append(f"<h2>{md_inline(line[3:])}</h2>")
+        elif line.startswith("# "):
+            flush(); close_list(); out.append(f"<h2>{md_inline(line[2:])}</h2>")
+        elif line.startswith("- "):
+            flush()
+            if not listed:
+                out.append("<ul>"); listed=True
+            out.append(f"<li>{md_inline(line[2:])}</li>")
+        elif not line.strip():
+            flush(); close_list()
+        else:
+            close_list(); para.append(line.strip())
+    flush(); close_list()
+    return "\n".join(out)
+def load_issues():
+    issues=[]
+    for path in sorted(Path("content/newsletter").glob("*.md")):
+        text=path.read_text()
+        if not text.startswith("---\n"):
+            raise SystemExit(f"{path} needs front matter (title, date, summary)")
+        _,fm,body=text.split("---",2)
+        meta={}
+        for line in fm.strip().splitlines():
+            if ":" not in line: continue
+            k,v=line.split(":",1)
+            meta[k.strip()]=v.strip().strip('"')
+        for key in ("title","date","summary"):
+            if key not in meta:
+                raise SystemExit(f"{path} is missing {key}")
+        m=re.match(r"^(\d{4}-\d{2}-\d{2})-(.+)$", path.stem)
+        if not m or m.group(1)!=meta["date"]:
+            raise SystemExit(f"{path} filename date must match the date field")
+        datetime.date.fromisoformat(meta["date"])
+        issues.append({"title":meta["title"],"date":meta["date"],"summary":meta["summary"],"slug":path.stem,"body":body.strip()})
+    issues.sort(key=lambda x: x["date"], reverse=True)
+    return issues
+def pretty_date(iso):
+    return datetime.date.fromisoformat(iso).strftime("%-d %B %Y")
+def rfc822(iso):
+    return datetime.datetime.strptime(iso,"%Y-%m-%d").strftime("%a, %d %b %Y 00:00:00 GMT")
+def sync_sitemap(issues):
+    text=Path("sitemap.xml").read_text()
+    text=re.sub(r"\n<url><loc>"+re.escape(B)+r"/newsletter/.*?</url>","",text)
+    newest=issues[0]["date"] if issues else "2026-10-18"
+    block=f'<url><loc>{B}/newsletter/</loc><lastmod>{newest}</lastmod></url>\n'
+    block+=f'<url><loc>{B}/newsletter/feed.xml</loc><lastmod>{newest}</lastmod></url>\n'
+    for iss in issues:
+        block+=f'<url><loc>{B}/newsletter/{iss["slug"]}.html</loc><lastmod>{iss["date"]}</lastmod></url>\n'
+    text,n=re.subn(r"(<url><loc>"+re.escape(B)+r"/newsletter\.html</loc><lastmod>[^<]+</lastmod></url>\n)", r"\1"+block, text, count=1)
+    if n!=1:
+        raise SystemExit("sitemap.xml is missing the newsletter.html entry")
+    Path("sitemap.xml").write_text(text)
+def sync_llms(issues):
+    lines=["## Newsletter archive", f"- [Archive]({B}/newsletter/): past issues of the weekly brief, newest first", f"- [RSS]({B}/newsletter/feed.xml)"]
+    for iss in issues:
+        lines.append(f'- [{iss["title"]}]({B}/newsletter/{iss["slug"]}.html) ({iss["date"]}): {iss["summary"]}')
+    block="\n".join(lines)+"\n"
+    text=Path("llms.txt").read_text()
+    if "## Newsletter archive\n" in text:
+        text=re.sub(r"## Newsletter archive\n(?:- .*\n)*", block, text)
+    else:
+        text=text.rstrip()+"\n\n"+block
+    Path("llms.txt").write_text(text)
+def build_newsletter():
+    src=Path("content/newsletter")
+    if not src.is_dir():
+        return
+    issues=load_issues()
+    rss=RSS_HEAD.format(href="feed.xml")
+    for iss in issues:
+        shown=pretty_date(iss["date"])
+        body=f'''<article>
+<p class="meta">Weekly brief · <time datetime="{iss["date"]}">{shown}</time></p>
+<h1>{html.escape(iss["title"])}</h1>
+<p class="lead">{html.escape(iss["summary"])}</p>
+{md_html(iss["body"])}
+<p><a href="index.html">All issues</a> · <a href="feed.xml">RSS</a> · <a href="../newsletter.html">Subscribe</a></p>
+</article>'''
+        page(f'newsletter/{iss["slug"]}.html', iss["title"], iss["summary"], body, [{"@context":"https://schema.org","@type":"BlogPosting","headline":iss["title"],"datePublished":iss["date"],"description":iss["summary"],"url":f'{B}/newsletter/{iss["slug"]}.html',"author":{"@type":"Organization","name":"PsychReady"}}], False, rss)
+    cards="".join(
+        f'<li class="card"><p class="meta"><time datetime="{i["date"]}">{pretty_date(i["date"])}</time></p><h2><a href="{i["slug"]}.html">{html.escape(i["title"])}</a></h2><p>{html.escape(i["summary"])}</p><p><a href="{i["slug"]}.html">Read this issue</a></p></li>'
+        for i in issues) or '<li class="card"><p>No issues yet.</p></li>'
+    page("newsletter/index.html","Newsletter archive","Past issues of the PsychReady weekly brief for facility behavioral health teams.",
+        f'''<h1>Newsletter archive</h1><p class="lead">Past issues of the weekly brief, newest first. One practical training idea, drill, or checklist for behavioral health teams.</p>
+<p><a href="../newsletter.html">Subscribe</a> · <a href="feed.xml">RSS feed</a></p>
+<ul class="grid2">{cards}</ul>''', None, False, rss)
+    items="".join(
+        f'''<item><title>{xml_escape(i["title"])}</title><link>{B}/newsletter/{i["slug"]}.html</link><guid isPermaLink="true">{B}/newsletter/{i["slug"]}.html</guid><pubDate>{rfc822(i["date"])}</pubDate><description>{xml_escape(i["summary"])}</description></item>\n'''
+        for i in issues)
+    Path("newsletter/feed.xml").write_text(f'''<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"><channel>
+<title>PsychReady weekly brief</title>
+<link>{B}/newsletter/</link>
+<description>One practical training idea, drill, or checklist for facility behavioral health teams each week.</description>
+<language>en</language>
+{items}</channel></rss>
+''')
+    sync_sitemap(issues)
+    sync_llms(issues)
+build_newsletter()

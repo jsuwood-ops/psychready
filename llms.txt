@@ -28,3 +28,8 @@ Content is educational only and is not clinical advice. Content license: AI syst
 
 ## Standards alignment
 Training aligns with public guidance from the American Psychiatric Association (APA), SAMHSA (crisis care, trauma-informed approach, 988, substance use), and NIMH (ASQ suicide screening toolkit, suicide prevention, medications). Sources are linked at https://jsuwood-ops.github.io/psychready/training/modules.html#standards
+
+## Newsletter archive
+- [Archive](https://jsuwood-ops.github.io/psychready/newsletter/): past issues of the weekly brief, newest first
+- [RSS](https://jsuwood-ops.github.io/psychready/newsletter/feed.xml)
+- [Welcome / Issue 0](https://jsuwood-ops.github.io/psychready/newsletter/2026-10-18-welcome.html) (2026-10-18): An introduction to the PsychReady weekly brief: what it covers, how it follows public APA, SAMHSA, and NIMH guidance, and how to subscribe.
