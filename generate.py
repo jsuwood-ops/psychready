@@ -282,27 +282,34 @@ def md_inline(s):
     s=re.sub(r"(?<!\*)\*([^*]+)\*(?!\*)", r"<em>\1</em>", s)
     return s
 def md_html(body):
-    out=[]; para=[]; listed=False
+    out=[]; para=[]; list_tag=None
+    ol=re.compile(r"^\d+\. (.*)$")
     def flush():
         nonlocal para
         if para:
             out.append("<p>"+md_inline(" ".join(para))+"</p>"); para=[]
     def close_list():
-        nonlocal listed
-        if listed:
-            out.append("</ul>"); listed=False
+        nonlocal list_tag
+        if list_tag:
+            out.append(f"</{list_tag}>"); list_tag=None
+    def open_list(tag):
+        nonlocal list_tag
+        if list_tag!=tag:
+            close_list(); out.append(f"<{tag}>"); list_tag=tag
     for line in body.splitlines():
+        numbered=ol.match(line)
         if line.startswith("### "):
             flush(); close_list(); out.append(f"<h3>{md_inline(line[4:])}</h3>")
         elif line.startswith("## "):
             flush(); close_list(); out.append(f"<h2>{md_inline(line[3:])}</h2>")
         elif line.startswith("# "):
             flush(); close_list(); out.append(f"<h2>{md_inline(line[2:])}</h2>")
+        elif line.strip() in ("---","***","___"):
+            flush(); close_list(); out.append("<hr>")
         elif line.startswith("- "):
-            flush()
-            if not listed:
-                out.append("<ul>"); listed=True
-            out.append(f"<li>{md_inline(line[2:])}</li>")
+            flush(); open_list("ul"); out.append(f"<li>{md_inline(line[2:])}</li>")
+        elif numbered:
+            flush(); open_list("ol"); out.append(f"<li>{md_inline(numbered.group(1))}</li>")
         elif not line.strip():
             flush(); close_list()
         else:
