@@ -67,6 +67,18 @@ def checklist(rows):
     body="".join(f"<tr><td>{x}</td><td>☐</td></tr>" for x in rows)
     return ('<table><caption>Observed skills (Yes / Not yet)</caption><thead><tr><th scope="col">Skill</th><th scope="col">Observed?</th></tr></thead><tbody>'
             +body+'</tbody></table><p class="small">Set your own mastery threshold, for example all safety items plus most others. Reassess at one month.</p>')
+def skilltable(caption, rows):
+    body=""
+    for skill, slug, label in rows:
+        shown=html.escape(skill, quote=False)
+        lab=html.escape(skill, quote=True)
+        body+=f'<tr><td>{shown}</td><td><a href="{slug}.html">{html.escape(label, quote=False)}</a></td><td><input type="checkbox" aria-label="Observed: {lab}"></td></tr>'
+    return ('<table class="skills"><caption>'+html.escape(caption, quote=False)+'</caption><thead><tr>'
+            '<th scope="col">Skill</th><th scope="col">Module</th><th scope="col">Observed?</th>'
+            '</tr></thead><tbody>'+body+'</tbody></table>')
+def source_line(slug):
+    note, keys = ALIGN[slug]
+    return f'<p class="small"><strong>Standards:</strong> {html.escape(note, quote=False)} Sources: {srclinks(keys)}.</p>'
 def lesson(slug,h1,page_title,desc,meta,objectives,learn,practice,simulate,measure,reading,tail=""):
     note,keys=ALIGN[slug]
     body=f'''<article><h1>{h1}</h1><p class="meta">{meta}</p>
@@ -86,11 +98,12 @@ page("index.html","Behavioral Health Staff Training for Facilities","Practical, 
 <p class="lead">Competency-based modules, simulation drills, and program playbooks for nurses, psychiatrists, social workers, techs, security, and primary-care partners.</p>
 <p><a class="btn" href="training/index.html">Start training</a> <a class="btn btn-ghost" href="pricing.html">See pricing</a> <a class="btn btn-ghost" href="newsletter.html">Get the weekly brief</a></p></section>
 <section><h2>Who PsychReady is for</h2><ul class="grid3">
-<li class="card"><h3>Educators &amp; nurse managers</h3><p>Ready-to-run lesson structures, skills checklists, and refresher calendars.</p></li>
+<li class="card"><h3>Educators &amp; nurse managers</h3><p>Ready-to-run lesson structures, a <a href="training/behavioral-health-staff-training-checklist.html">behavioral health staff training checklist</a>, and refresher calendars.</p></li>
 <li class="card"><h3>ED leads &amp; C-L teams</h3><p>Teamwork drills, telepsychiatry workflows, and consult pathways.</p></li>
 <li class="card"><h3>Facility leaders</h3><p>Solutions mapped to workforce, access, integration, and funding barriers.</p></li></ul></section>
 <section><h2>Featured modules</h2><ul class="grid2">{mods_cards}</ul><p><a href="training/modules.html">See all eight modules →</a></p></section>
 <section><h2>How the training works</h2><ol class="steps"><li><strong>Learn</strong> — short focused content per competency.</li><li><strong>Practice</strong> — Behavioral Skills Training: instruct, model, rehearse, feedback.</li><li><strong>Simulate</strong> — interprofessional scenarios with structured debrief.</li><li><strong>Measure</strong> — observed competence and operational outcomes, not just attendance.</li></ol></section>
+<section><h2>Behavioral health staff training checklist</h2><p>Inpatient and residential teams can print one checklist for onboarding, annual competencies, and high-risk skills. Each item links to a free module. <a href="training/behavioral-health-staff-training-checklist.html">Open the checklist</a>.</p></section>
 <section><h2>Fixing access barriers</h2><p>Staffing gaps, rural access, and siloed care limit psychiatric services. <a href="barriers.html">See solutions mapped to common facility barriers</a>.</p></section>
 {cta()}''',[course("PsychReady Behavioral Health Staff Curriculum","Competency-based training for facility behavioral health teams.","training/")])
 
@@ -103,13 +116,14 @@ page("training/index.html","Competency-Based Behavioral Health Curriculum","Over
 <section><h2>4. mhGAP-style cascade (“train the trainer”)</h2><p>The WHO mhGAP Intervention Guide and training manuals use cascade training: master trainers prepare local facilitators, who train frontline staff through role-play, case discussion, and skills assessment. This helps training outlast staff turnover.</p></section>
 <section><h2>5. Clinical supervision as the backbone</h2><p>Regular, competency-based supervision with direct observation, documented feedback, and post-incident reflection that supports staff wellbeing.</p></section>
 <section><h2>6. Aligned with APA, SAMHSA, and NIMH</h2><p>Each module maps to public guidance: APA practice guidelines for clinical care, SAMHSA for crisis care, trauma-informed care and substance use, and NIMH for suicide screening and medication basics. Modules list their sources.</p></section>
+<section><h2>Behavioral health staff training checklist</h2><p>Track onboarding, annual competencies, and high-risk skills for inpatient and residential programs on one printable page. <a href="behavioral-health-staff-training-checklist.html">Open the behavioral health staff training checklist</a>. Each item links to a free module.</p></section>
 <section><h2>Full lessons</h2><p>Each module is a full lesson: learn, practice, simulate, and measure.</p><ol>{"".join(f'<li><a href="{a}.html">{t}</a></li>' for a,t,_ in MODS)}</ol></section>
 {standards()}<p><a class="btn" href="modules.html">Browse modules</a> <a class="btn btn-ghost" href="../pricing.html">See pricing</a></p>{cta("../")}''',[course("PsychReady Curriculum","Competency-based behavioral health staff curriculum.","training/")],True)
 
 # MODULES
 ml="".join(f'<section id="{a}" class="card module"><h2>{t}</h2><p>{s}</p><p class="small"><strong>Standards:</strong> {ALIGN[a][0]} Sources: {srclinks(ALIGN[a][1])}.</p><p><a href="{a}.html">Open the full lesson →</a></p></section>' for a,t,s in MODS)
 toc="".join(f'<li><a href="#{a}">{t}</a></li>' for a,t,_ in MODS)
-page("training/modules.html","Training Modules for Psychiatric & Behavioral Health Staff","Eight PsychReady modules: de-escalation, suicide risk, trauma-informed care, teamwork, telepsychiatry, restraint alternatives, physical health, and supervision.",f'<h1>Training modules</h1><p class="lead">The curriculum overview stays free. Each lesson below is a full module with practice, simulation, and a checklist.</p><nav aria-label="Modules" class="toc"><ol>{toc}</ol></nav>{ml}{standards()}<p><a class="btn" href="../pricing.html">See pricing</a></p>{cta("../")}',
+page("training/modules.html","Training Modules for Psychiatric & Behavioral Health Staff","Eight PsychReady modules: de-escalation, suicide risk, trauma-informed care, teamwork, telepsychiatry, restraint alternatives, physical health, and supervision.",f'<h1>Training modules</h1><p class="lead">The curriculum overview stays free. Each lesson below is a full module with practice, simulation, and a checklist. For one printable list, use the <a href="behavioral-health-staff-training-checklist.html">behavioral health staff training checklist</a>.</p><nav aria-label="Modules" class="toc"><ol>{toc}</ol></nav>{ml}{standards()}<p><a class="btn" href="../pricing.html">See pricing</a></p>{cta("../")}',
  [{"@context":"https://schema.org","@type":"ItemList","itemListElement":[{"@type":"ListItem","position":i+1,"name":t,"url":f"{B}/training/{a}.html"} for i,(a,t,_) in enumerate(MODS)]}],True)
 
 # LESSONS
@@ -188,6 +202,93 @@ f'''<p>Supervision is how the other modules stay in use after the class ends. Hi
 ["Observes the skill directly","Uses what went well, what to change, and one next step","Withholds sign-off when safety items are not met","Invites the staff member's account of the event","Names the policy or standard being applied","Schedules the next observation"],
 [f"APA, {srclinks(['apa'])}.",f"SAMHSA, {srclinks(['tic'])}."])
 
+# CHECKLIST
+def module_rows(slug, label, items):
+    return [(item, slug, label) for item in items]
+CHECK_TITLE="Behavioral Health Staff Training Checklist"
+CHECK_DESC="Printable behavioral health staff training checklist for inpatient and residential facilities, covering onboarding, annual competencies, and high-risk skills."
+check_path="training/behavioral-health-staff-training-checklist.html"
+check_url=B+"/training/behavioral-health-staff-training-checklist.html"
+onboarding_table=skilltable("Onboarding in the first weeks",[
+("Positions safely, uses a calm tone and short statements, and offers at least two genuine choices before setting a limit.","de-escalation","De-escalation"),
+("Asks directly about thoughts of suicide, a plan, intent, and recent behavior, and does not treat the screen as a complete assessment.","suicide-risk","Suicide risk"),
+("Completes a collaborative safety plan with warning signs, coping steps, contacts, and concrete means safety, and documents the handoff.","suicide-risk","Suicide risk"),
+("Explains what will happen before doing it, offers a real choice, and asks permission before touch.","trauma-informed","Trauma-informed care"),
+("Checks airway, breathing, circulation, and consciousness, and escalates new physical signs with the facility early-warning policy.","physical-health","Physical health"),
+("Names a preceptor, who observes a high-risk skill directly and withholds sign-off when a safety item is not met.","supervision","Supervision")])
+annual_table=skilltable("Annual competencies",[
+("Re-observe safe positioning, one communicator, choices, a respectful limit, and the debrief.","de-escalation","De-escalation"),
+("Re-observe a direct question about suicide, a collaborative safety plan, means safety, and the handoff.","suicide-risk","Suicide risk"),
+("Re-observe an explanation before action, a real choice, permission before touch, and a qualified interpreter when clinical information is shared.","trauma-informed","Trauma-informed care"),
+("Re-observe at least two non-restrictive options before a limit, and a plan for post-incident review.","restraint-alternatives","Restraint alternatives"),
+("If the role includes video visits, re-observe identity, location, privacy, and a reason to convert to in-person care.","telepsychiatry","Telepsychiatry"),
+("Re-observe a brief that names roles, an SBAR with a recommendation, and a closed-loop check-back.","teamstepps","Teamwork"),
+("Re-observe early-warning escalation so new physical signs are not attributed only to the psychiatric diagnosis.","physical-health","Physical health"),
+("If the person precepts others, re-observe direct observation, three-part feedback, and withholding sign-off when safety items are not met.","supervision","Supervision"),
+("After an incident, run a targeted refresher on the skill involved instead of waiting for the annual lab.","supervision","Supervision")])
+HIGH=[
+("skill-de-escalation","De-escalation and crisis prevention","de-escalation","De-escalation",
+"<p>Physical intervention stays a last resort under local policy.</p>",
+["Positions safely with an exit route","Introduces self and uses a calm tone","Uses short, clear statements","Reflects the person's feelings or needs","Offers at least two genuine choices","Sets a respectful limit","Coordinates with the team using closed-loop communication","Participates in the debrief"]),
+("skill-suicide-risk","Suicide risk screening and safety planning","suicide-risk","Suicide risk",
+"<p>Use a structured screen, such as NIMH's ASQ toolkit, and explain that a screen is not a full assessment. If someone is in immediate danger, follow your emergency policy rather than handing them a number and leaving.</p>",
+["Asks directly about thoughts of suicide","Asks about plan, intent, and recent behavior","Stays with the person when risk is acute, following local policy","Completes a collaborative safety plan with warning signs, coping steps, and contacts","Discusses means safety in concrete terms","Documents the formulation and the handoff","Names 988 or the local crisis resource","Does not treat the screen as a complete assessment"]),
+("skill-trauma-informed","Trauma-informed care","trauma-informed","Trauma-informed care",
+"<p>Explain what will happen before it happens, and offer a real choice. Use a qualified interpreter rather than a family member when clinical information is shared.</p>",
+["Explains what will happen before doing it","Offers at least one real choice","Asks permission before touch","Arranges a qualified interpreter when needed","Does not require a trauma story to be retold for staff curiosity","Names one assumption they checked"]),
+("skill-restraint","Restraint and seclusion safety","restraint-alternatives","Restraint alternatives",
+"<p>These items are prevention and least-restrictive practice. This checklist does not authorize restraint or seclusion. Your facility policy, and the law where you practice, decide if and when those measures may be used.</p>",
+["Tries at least two non-restrictive options first","Reduces noise, crowding, or audience when possible","Explains the limit in plain language","Assigns one communicator","Documents what was tried","Plans a post-incident review that includes the person when possible"]),
+("skill-telepsychiatry","Telepsychiatry","telepsychiatry","Telepsychiatry",
+"<p>Use this table only when the role includes video visits. Stop the visit when you cannot examine what matters, when agitation cannot be managed through the screen, when delirium or another medical emergency is possible, or when the technology fails.</p>",
+["Confirms identity and location","States who else is present","Explains privacy limits","Names the tele-presenter's role","Names a reason to convert to in-person care","Has a local escalation contact before starting"]),
+("skill-supervision","Supervision","supervision","Supervision",
+"<p>Sign-off means a supervisor saw the skill and the safety items were met. Attendance is not sign-off.</p>",
+["Observes the skill directly","Uses what went well, what to change, and one next step","Withholds sign-off when safety items are not met","Invites the staff member's account of the event","Names the policy or standard being applied","Schedules the next observation"]),
+("skill-teamwork","Teamwork","teamstepps","Teamwork",
+"<p>These items borrow brief, huddle, debrief, SBAR, call-out, and closed-loop tools from TeamSTEPPS, the Agency for Healthcare Research and Quality teamwork program. They are not a substitute for an AHRQ course. Use them on inpatient units, in residential programs, and in the psychiatric emergency department.</p>",
+["Leads a brief that names roles","Gives SBAR with a clear recommendation","Uses a call-out for a critical fact","Closes the loop and confirms it","Calls for help before becoming overwhelmed","Joins the debrief and names one change"]),
+("skill-physical-health","Medical escalation","physical-health","Physical health",
+"<p>The supervision module names medical escalation, with de-escalation and suicide response, as a high-risk skill. This table is recognition and escalation. It is not a protocol for doses or for choosing a medicine. Use the facility early-warning score and the steps that go with it.</p>",
+["Checks airway, breathing, circulation, and consciousness","Does not attribute new physical signs only to the psychiatric diagnosis","Uses the facility early-warning score and escalation policy","Names a medication adverse effect to watch for from the facility list","Treats possible overdose or severe withdrawal as a medical emergency","Documents the handoff to medical staff"])]
+high_html=""
+for sid, heading, slug, label, intro, items in HIGH:
+    high_html+=f'<section id="{sid}"><h3><a href="{slug}.html">{html.escape(heading)}</a></h3>{intro}{source_line(slug)}{skilltable(heading, module_rows(slug, label, items))}</section>'
+check_body=f'''<article>
+<h1>Behavioral health staff training checklist</h1>
+<p class="lead">A printable checklist for staff training in inpatient and residential behavioral health facilities. Use it for onboarding, annual competencies, and direct observation of high-risk skills.</p>
+<p class="no-print"><button class="btn" type="button" data-print>Print this checklist</button></p>
+<p class="meta">Staff name _______________ &nbsp; Role _______________ &nbsp; Unit _______________<br>
+Date _______________ &nbsp; Preceptor _______________</p>
+<p>Check a box only after a preceptor has seen the skill. Reading a module is not sign-off. Your facility sets the mastery threshold, for example all safety items plus most others. Reassess at one month. Refresh at induction, annually, and after incidents.</p>
+<p>The onboarding and annual tables are the program record: one mark when observation of that competency is done. The high-risk tables are the skills the preceptor watches. Skip any row the role does not perform. Marks stay in this browser tab and are not sent to PsychReady. Print a copy if you need a record.</p>
+<p>This checklist is a training aid. It is not a regulation, and it does not replace local policy, accredited training, or the public sources linked below.</p>
+<nav class="toc" aria-label="Checklist"><ol>
+<li><a href="#onboarding">Onboarding</a></li>
+<li><a href="#annual">Annual competencies</a></li>
+<li><a href="#high-risk">High-risk skills</a></li>
+</ol></nav>
+<section id="onboarding"><h2>Onboarding</h2>
+<p>In the first weeks, cover de-escalation, suicide and self-harm risk, trauma-informed care, and physical-health escalation. Pair each new hire with a preceptor. When the role includes crisis teamwork, video visits, or a situation where restriction might be considered, observe those high-risk tables during orientation as well.</p>
+{onboarding_table}
+</section>
+<section id="annual"><h2>Annual competencies</h2>
+<p>Hold an annual skills lab and re-observe the competencies this role uses. Between labs, a 10-minute huddle can rehearse one skill. After an incident, run a targeted refresher rather than waiting for the next annual date.</p>
+{annual_table}
+</section>
+<section id="high-risk"><h2>High-risk skills</h2>
+<p>Use these tables while you watch. Check a box only for a skill you saw. For de-escalation, suicide response, and medical escalation, withhold sign-off when a safety item is not met.</p>
+{high_html}
+</section>
+</article>
+'''+standards()+cta("../")
+page(check_path, CHECK_TITLE, CHECK_DESC, check_body, [
+{"@context":"https://schema.org","@type":"LearningResource","name":"Behavioral health staff training checklist","description":CHECK_DESC,"learningResourceType":"Checklist","educationalLevel":"Professional","audience":{"@type":"Audience","audienceType":"Inpatient and residential behavioral health facility staff"},"url":check_url,"isAccessibleForFree":True},
+{"@context":"https://schema.org","@type":"ItemList","name":"Behavioral health staff training checklist","itemListElement":[
+{"@type":"ListItem","position":1,"name":"Onboarding","url":check_url+"#onboarding"},
+{"@type":"ListItem","position":2,"name":"Annual competencies","url":check_url+"#annual"},
+{"@type":"ListItem","position":3,"name":"High-risk skills","url":check_url+"#high-risk"}]}], True)
+
 # BARRIERS
 BAR=[("Workforce shortages",["Hub-and-spoke telepsychiatry for ED and inpatient consults.","Expand the team with psychiatric mental health nurse practitioners and clearly defined roles.","Regional training pipelines and rural residency or fellowship tracks.","Retention: flexible schedules, wellbeing support, shared caseloads."]),
 ("Rural & underserved access",["Telepsychiatry with local nursing or tech support and in-person backup.","Task-shifting screening and follow-up to trained primary-care and community staff (mhGAP approach).","Partnerships with community mental health, peer support, and mobile crisis teams."]),
@@ -202,7 +303,7 @@ page("barriers.html","Solutions to Barriers in Psychiatric Services","Practical 
 # EDUCATORS
 page("for-educators.html","How to Run a Behavioral Health Training Program","A playbook for educators: induction, refreshers, simulation, supervision, and measuring outcomes for behavioral health staff training.",f'''
 <h1>For educators: running your program</h1>
-<ol class="steps big"><li><h2>Induction</h2><p>Within the first weeks, cover core modules: de-escalation, suicide risk, trauma-informed care, and physical-health escalation. Pair each new hire with a preceptor and a competency checklist.</p></li>
+<ol class="steps big"><li><h2>Induction</h2><p>Within the first weeks, cover core modules: de-escalation, suicide risk, trauma-informed care, and physical-health escalation. Pair each new hire with a preceptor and the <a href="training/behavioral-health-staff-training-checklist.html">behavioral health staff training checklist</a>.</p></li>
 <li><h2>Refreshers</h2><p>Hold annual skills labs and run 10-minute micro-learning huddles on the unit. After incidents, run targeted refreshers.</p></li>
 <li><h2>Simulation</h2><p>Run interprofessional scenarios quarterly or more often, always with structured debrief. Small and rural sites can share regional simulation days.</p></li>
 <li><h2>Supervision</h2><p>Use direct observation, documented feedback, and reflective practice, and gatekeep high-risk skills.</p></li>

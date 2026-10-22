@@ -3,7 +3,7 @@
 - 
 ## Induction
 
-Within the first weeks, cover core modules: de-escalation, suicide risk, trauma-informed care, and physical-health escalation. Pair each new hire with a preceptor and a competency checklist.
+Within the first weeks, cover core modules: de-escalation, suicide risk, trauma-informed care, and physical-health escalation. Pair each new hire with a preceptor and the [behavioral health staff training checklist](../training/behavioral-health-staff-training-checklist.html).
 
 - 
 ## Refreshers
