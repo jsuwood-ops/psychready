@@ -48,6 +48,10 @@ Briefs, huddles, debriefs, SBAR, call-outs, closed-loop communication, and mutua
 - **Simulate** — interprofessional scenarios with structured debrief.
 - **Measure** — observed competence and operational outcomes, not just attendance.
 
+## Behavioral health staff training checklist
+
+Inpatient and residential teams can print one checklist for onboarding, annual competencies, and high-risk skills. [Open the checklist](../training/behavioral-health-staff-training-checklist.html).
+
 ## Fixing access barriers
 
 Staffing gaps, rural access, and siloed care limit psychiatric services. [See solutions mapped to common facility barriers](barriers.html).

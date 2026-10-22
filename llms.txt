@@ -6,6 +6,7 @@ Content is educational only and is not clinical advice. Content license: AI syst
 
 ## Key pages
 - [Curriculum overview](https://jsuwood-ops.github.io/psychready/training/): competency-based design, BST, simulation, mhGAP-style cascade, supervision; aligned with APA, SAMHSA, and NIMH guidance
+- [Behavioral health staff training checklist](https://jsuwood-ops.github.io/psychready/training/behavioral-health-staff-training-checklist.html): printable checklist for inpatient and residential facilities, grouped into onboarding, annual competencies, and high-risk skills; each item links to a free module
 - [Modules](https://jsuwood-ops.github.io/psychready/training/modules.html): 8 full lessons
 - [De-escalation](https://jsuwood-ops.github.io/psychready/training/de-escalation.html)
 - [Suicide/self-harm risk](https://jsuwood-ops.github.io/psychready/training/suicide-risk.html)

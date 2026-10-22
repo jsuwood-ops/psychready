@@ -24,3 +24,16 @@ table{border-collapse:collapse;width:100%;background:#fff}th,td{border:1px solid
 .site-footer{background:#0c2e33;color:#dfe9e8;padding:2rem 0}.site-footer a{color:#fff}.site-footer .disclaimer a{color:var(--teal)}
 .slots{display:flex;gap:.75rem;flex-wrap:wrap}.slot{border:2px dashed #6f8f8d;border-radius:10px;padding:.8rem 1.4rem;text-decoration:none}
 .toc ol{columns:2}@media(max-width:600px){.toc ol{columns:1}}
+table.skills td:last-child,table.skills th:last-child{text-align:center;width:7rem}
+table.skills input[type=checkbox]{width:1.15rem;height:1.15rem;accent-color:var(--teal)}
+@media print{
+.site-header,.sponsor-strip,.cta,.skip,.no-print{display:none !important}
+.site-footer{background:#fff;color:#000;padding:0}
+.site-footer a{color:inherit}
+.site-footer p:not(.disclaimer){display:none}
+body{background:#fff;color:#000}
+a,a:hover{color:#000}
+thead{display:table-header-group}
+tr{break-inside:avoid}
+h2,h3{break-after:avoid}
+}

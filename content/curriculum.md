@@ -22,6 +22,10 @@ The WHO mhGAP Intervention Guide and training manuals use cascade training: mast
 
 Regular, competency-based supervision with direct observation, documented feedback, and post-incident reflection that supports staff wellbeing.
 
+## Behavioral health staff training checklist
+
+Track onboarding, annual competencies, and high-risk skills for inpatient and residential programs on one printable page. [Open the behavioral health staff training checklist](../training/behavioral-health-staff-training-checklist.html). Each item links to a free module.
+
 Browse modules
 ## Get the weekly brief
 
