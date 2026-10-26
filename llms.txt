@@ -33,5 +33,6 @@ Training aligns with public guidance from the American Psychiatric Association (
 ## Newsletter archive
 - [Archive](https://jsuwood-ops.github.io/psychready/newsletter/): past issues of the weekly brief, newest first
 - [RSS](https://jsuwood-ops.github.io/psychready/newsletter/feed.xml)
+- [Issue 2 / Sign-off means someone saw it](https://jsuwood-ops.github.io/psychready/newsletter/2026-10-26-staff-checklist.html) (2026-10-26): A 10-minute huddle that turns a checked box into an observed skill using PsychReady's new printable staff training checklist, NIMH's open call for comment on rapid-acting psychiatric drugs, APA's Nobel news, and a quiet week at SAMHSA.
 - [Issue 1 / Universal suicide screening, one huddle at a time](https://jsuwood-ops.github.io/psychready/newsletter/2026-10-19-universal-screening.html) (2026-10-19): A 10-minute huddle drill on asking the four ASQ screening questions, a new NIMH-supported study on universal screening, SAMHSA's new STREETS awards, and October research from APA journals.
 - [Welcome / Issue 0](https://jsuwood-ops.github.io/psychready/newsletter/2026-10-18-welcome.html) (2026-10-18): An introduction to the PsychReady weekly brief: what it covers, how it follows public APA, SAMHSA, and NIMH guidance, and how to subscribe.
